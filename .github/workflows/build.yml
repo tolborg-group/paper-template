@@ -20,7 +20,7 @@ jobs:
           cache: true
 
       - name: Build PDF
-        run: pixi run build
+        run: pixi run -e latex build
 
       # ── On every push / PR: upload as a downloadable artifact ───────────────
       - name: Upload PDF artifact

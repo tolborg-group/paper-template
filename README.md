@@ -10,10 +10,10 @@ and automatic PDF compilation on every commit via GitHub Actions.
 git clone <this-repo> my-paper && cd my-paper
 
 # build once (downloads LaTeX packages automatically on first run)
-pixi run build
+pixi run -e latex build
 
 # rebuild on every save
-pixi run watch
+pixi run -e latex watch
 ```
 
 The compiled `main.pdf` appears in the root directory.

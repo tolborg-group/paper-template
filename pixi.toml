@@ -15,12 +15,11 @@ pandas     = "*"
 tectonic  = "*"
 watchexec = "*"
 
+[feature.latex.tasks]
+build = "tectonic main.tex"
+watch = "watchexec -e tex,bib tectonic main.tex"
+clean = "rm -f main.pdf main.aux main.log main.bbl main.blg"
+
 [environments]
 default = { features = [],        solve-group = "default" }
 latex   = { features = ["latex"], solve-group = "default" }
-
-# ── Tasks (build/watch/clean always run in the latex environment) ─────────────
-[tasks]
-build = { cmd = "tectonic main.tex",                     environment = "latex" }
-watch = { cmd = "watchexec -e tex,bib tectonic main.tex", environment = "latex" }
-clean = { cmd = "rm -f main.pdf main.aux main.log main.bbl main.blg", environment = "latex" }
