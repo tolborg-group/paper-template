@@ -1,0 +1,38 @@
+name: Build PDF
+
+on:
+  push:
+    branches: ["main"]
+    tags:     ["v*"]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: prefix-dev/setup-pixi@v0.8.1
+        with:
+          pixi-version: v0.41.4
+          environments: latex
+          cache: true
+
+      - name: Build PDF
+        run: pixi run build
+
+      # ── On every push / PR: upload as a downloadable artifact ───────────────
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-${{ github.sha }}
+          path: main.pdf
+          retention-days: 30
+
+      # ── On a version tag: attach PDF to the GitHub Release ─────────────────
+      - name: Attach PDF to Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: main.pdf

@@ -1,0 +1,26 @@
+[workspace]
+name = "paper-template"
+version = "0.1.0"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "osx-64"]
+
+# ── Default environment: Python for figure scripts ────────────────────────────
+[dependencies]
+python     = ">=3.11"
+matplotlib = "*"
+pandas     = "*"
+
+# ── LaTeX feature ─────────────────────────────────────────────────────────────
+[feature.latex.dependencies]
+tectonic  = "*"
+watchexec = "*"
+
+[environments]
+default = { features = [],        solve-group = "default" }
+latex   = { features = ["latex"], solve-group = "default" }
+
+# ── Tasks (build/watch/clean always run in the latex environment) ─────────────
+[tasks]
+build = { cmd = "tectonic main.tex",                     environment = "latex" }
+watch = { cmd = "watchexec -e tex,bib tectonic main.tex", environment = "latex" }
+clean = { cmd = "rm -f main.pdf main.aux main.log main.bbl main.blg", environment = "latex" }

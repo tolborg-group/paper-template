@@ -1,0 +1,65 @@
+\documentclass[aps,prl,reprint,amsmath,amssymb,superscriptaddress]{revtex4-2}
+
+% ── Packages ─────────────────────────────────────────────────────────────────
+\usepackage{graphicx}          % external figures (PNG, PDF)
+\usepackage{hyperref}          % clickable references and DOI links
+\usepackage{siunitx}           % consistent units: \qty{3.5}{\angstrom}
+\usepackage{cleveref}          % \cref{fig:band} → "Fig. 1"
+\usepackage{booktabs}          % publication-quality tables
+\usepackage{xcolor}            % colour for todo notes
+\usepackage[normalem]{ulem}    % \sout for strikethrough in revision
+
+% ── Native LaTeX plotting ─────────────────────────────────────────────────────
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ── Custom units (siunitx) ────────────────────────────────────────────────────
+\DeclareSIUnit{\atom}{atom}
+\DeclareSIUnit{\formulaunit}{f.u.}
+
+% ── Placeholder & revision helpers (remove before submission)
+\usepackage{lipsum}           % lorem ipsum: \lipsum[1-3] — delete when writing
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+\newcommand{\note}[1]{\textcolor{blue}{\textit{[#1]}}}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+\title{Paper Title}
+
+\author{First Author}
+\affiliation{Department of Chemistry and Bioscience,
+             Aalborg University, DK-9220 Aalborg, Denmark}
+
+\author{Second Author}
+\affiliation{Department of Chemistry and Bioscience,
+             Aalborg University, DK-9220 Aalborg, Denmark}
+
+\author{Third Author}
+\email{email@bio.aau.dk}
+\affiliation{Department of Chemistry and Bioscience,
+             Aalborg University, DK-9220 Aalborg, Denmark}
+
+\date{\today}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\maketitle
+
+% ─────────────────────────────────────────────────────────────────────────────
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/conclusion}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{acknowledgments}
+The authors acknowledge compute time on \todo{cluster name}.
+\end{acknowledgments}
+
+\bibliography{references}
+
+\end{document}
