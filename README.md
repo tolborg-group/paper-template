@@ -1,5 +1,7 @@
 # Tolborg Group — Paper Template
 
+[![Build PDF](https://github.com/tolborg-group/paper-template/actions/workflows/build.yml/badge.svg)](https://github.com/tolborg-group/paper-template/actions/workflows/build.yml)
+
 A LaTeX template for journal articles, with local builds via [Pixi](https://pixi.sh)
 and automatic PDF compilation on every commit via GitHub Actions.
 
@@ -17,6 +19,12 @@ pixi run -e latex watch
 ```
 
 The compiled `main.pdf` appears in the root directory.
+
+To download the latest PDF built by CI without cloning:
+
+```sh
+gh run download --name paper
+```
 
 ## Repository layout
 
