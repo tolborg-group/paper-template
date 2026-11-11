@@ -10,6 +10,22 @@ python     = ">=3.11"
 matplotlib = "*"
 pandas     = "*"
 
+# ── Claude Code: group skills (github.com/tolborg-group/group-skills) ─────────
+# Keep each cmd on one line: pixi's shell rejects a line starting with || or &&.
+[tasks.check-claude]
+cmd = "claude --version > /dev/null || (echo \"Claude Code not found. Install it and run 'claude' once to log in.\" && exit 1)"
+description = "Check that Claude Code is installed"
+
+[tasks.setup-claude]
+depends-on = ["check-claude"]
+cmd = "claude plugin marketplace add tolborg-group/group-skills && claude plugin install git@tolborg-group && claude plugin install latex@tolborg-group"
+description = "Install the group's Claude Code plugins (run once)"
+
+[tasks.sync]
+depends-on = ["check-claude"]
+cmd = 'claude "/git:sync"'
+description = "Start Claude Code to commit, pull and push this repo"
+
 # ── LaTeX feature ─────────────────────────────────────────────────────────────
 [feature.latex.dependencies]
 tectonic  = "*"
@@ -19,6 +35,12 @@ watchexec = "*"
 build = "tectonic main.tex"
 watch = "watchexec -e tex,bib tectonic main.tex"
 clean = "rm -f main.pdf main.aux main.log main.bbl main.blg"
+
+# Lives here so that tectonic is on PATH when Claude rebuilds the document.
+[feature.latex.tasks.diagnose]
+depends-on = ["check-claude"]
+cmd = 'claude "/latex:diagnose main.tex"'
+description = "Start Claude Code to find out why main.tex does not compile"
 
 [environments]
 default = { features = [],        solve-group = "default" }

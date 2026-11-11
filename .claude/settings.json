@@ -1,0 +1,18 @@
+{
+  "extraKnownMarketplaces": {
+    "tolborg-group": {
+      "source": { "source": "github", "repo": "tolborg-group/group-skills" }
+    }
+  },
+  "enabledPlugins": {
+    "git@tolborg-group": true,
+    "latex@tolborg-group": true
+  },
+  "permissions": {
+    "deny": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)"
+    ]
+  }
+}

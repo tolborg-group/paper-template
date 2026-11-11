@@ -26,6 +26,23 @@ To download the latest PDF built by CI without cloning:
 gh run download --name paper
 ```
 
+## Claude Code skills
+
+The template declares the group's [Claude Code](https://claude.com/claude-code)
+plugins from [group-skills](https://github.com/tolborg-group/group-skills) in
+`.claude/settings.json`. Install them once:
+
+```sh
+pixi run setup-claude
+```
+
+Then start a skill directly from the terminal:
+
+```sh
+pixi run sync       # commit, pull and push, with each git command explained
+pixi run diagnose   # find out why main.tex does not compile, and fix it
+```
+
 ## Repository layout
 
 ```
@@ -34,6 +51,7 @@ sections/           – one file per section (easier diffs, easier co-authoring)
 figures/            – source files for all figures (PDF or PNG preferred)
 references.bib      – BibTeX database
 pixi.toml           – reproducible environment + task aliases
+.claude/            – Claude Code settings: group plugins and git safety rules
 .github/workflows/  – CI pipeline
 ```
 
